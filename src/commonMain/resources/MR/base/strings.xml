@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="default_string">默认本地化字符串</string>
+
+    <string name="universal.app_name">Jellyflix Desktop</string>
+    <string name="universal.app_version">1.0.0</string>
+
+    <string name="universal.home">主页</string>
+    <string name="universal.libraries">库</string>
+    <string name="universal.account">账户</string>
+    <string name="universal.settings">设置</string>
+    <string name="universal.next_up">接下来</string>
+    <string name="universal.continue_watching">继续观看</string>
+    <string name="universal.view_all">查看所有</string>
+
+    <string name="home.new_item">最新 %1$s</string>
+
+    <string name="login">登录</string>
+    <string name="login.description">使用对应服务器的 Jellyfin 账户登录至 Jellyflix Desktop</string>
+    <string name="login.server">服务器</string>
+    <string name="login.username">用户名</string>
+    <string name="login.password">密码</string>
+    <string name="login.login_by_pin">使用 Quick Connect PIN</string>
+
+    <string name="settings">设置</string>
+    <string name="settings.general">通用</string>
+    <string name="settings.general.description">外观，显示设置</string>
+    <string name="settings.general.drawer">侧栏</string>
+    <string name="settings.general.drawer.control_display_items">显示项</string>
+    <string name="settings.general.drawer.control_display_items.description">控制侧栏列表显示项，如“库”、“收藏”</string>
+    <string name="settings.language">语言</string>
+    <string name="settings.language.description">显示语言，字幕语言</string>
+    <string name="settings.playback">播放</string>
+    <string name="settings.playback.description">播放器按键与手势，播放源</string>
+    <string name="settings.about">关于</string>
+    <string name="settings.about.description">关于此软件</string>
+    <string name="settings.about.version">版本</string>
+    <string name="settings.about.license">开放源代码许可</string>
+
+    <string name="settings.about.copyright">Copyright @ 2014-2023 Jellyflix. All Rights Reserved</string>
+
+    <string name="composable.error">错误</string>
+</resources>
