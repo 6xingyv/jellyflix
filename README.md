@@ -59,6 +59,10 @@ This application is still in early development.
 
 Welcome your issues & pr!
 
+## Translating
+
+[Crowdin](https://crowdin.com/project/jellyflix) is the translating tool.
+
 ## License
 
 Following repositories are used:
