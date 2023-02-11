@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_VARIABLE")
+
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
@@ -45,6 +47,8 @@ kotlin {
                 implementation("dev.icerock.moko:resources-compose:0.20.1")
                 // Jellyfin SDK
                 implementation("org.jellyfin.sdk:jellyfin-core:1.4.0")
+                // Jetpack Paging Multiplatform()
+                implementation("app.cash.paging:paging-common:3.1.1-0.1.1")
             }
         }
     }

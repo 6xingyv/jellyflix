@@ -23,6 +23,10 @@ class ScreenStack(rootPage: Screen) {
         currentScreen = screenStack.peek()
     }
 
+    fun clear() {
+        screenStack.clear()
+    }
+
     fun peek() = currentScreen
 
     fun history() = screenStack.size - 1

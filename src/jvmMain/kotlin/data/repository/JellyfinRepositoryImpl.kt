@@ -1,8 +1,12 @@
 package data.repository
 
+import app.cash.paging.Pager
+import app.cash.paging.PagingConfig
+import app.cash.paging.PagingData
 import data.model.SortBy
 import data.source.remote.JellyfinApi
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import org.jellyfin.sdk.model.api.*
 import java.util.*
@@ -31,6 +35,32 @@ class JellyfinRepositoryImpl(private val jellyfinApi: JellyfinApi) : JellyfinRep
             sortBy = listOf(sortBy.SortString),
             sortOrder = listOf(sortOrder)
         ).content.items.orEmpty()
+    }
+
+    override suspend fun getItemsPaging(
+        parentId: UUID?,
+        includeTypes: List<BaseItemKind>?,
+        recursive: Boolean,
+        sortBy: SortBy,
+        sortOrder: SortOrder
+    ): Flow<PagingData<BaseItemDto>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 10,
+                maxSize = 100,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                ItemsPagingSource(
+                    jellyfinApi,
+                    parentId,
+                    includeTypes,
+                    recursive,
+                    sortBy,
+                    sortOrder
+                )
+            }
+        ).flow
     }
 
     override suspend fun getPersonItems(
@@ -261,5 +291,26 @@ class JellyfinRepositoryImpl(private val jellyfinApi: JellyfinApi) : JellyfinRep
                 jellyfinApi.devicesApi.updateDeviceOptions(id, DeviceOptionsDto(0, customName = name))
             }
         }
+    }
+
+    override suspend fun loginByPassword(server: String, username: String, password: String) {
+        jellyfinApi.apply {
+            api.baseUrl = server
+        }
+        val authenticationResult by jellyfinApi.userApi.authenticateUserByName(
+            data = AuthenticateUserByName(
+                username = username,
+                pw = password
+            )
+        )
+        jellyfinApi.apply {
+            userId = authenticationResult.user!!.id
+            api.userId = authenticationResult.user!!.id
+            api.accessToken = authenticationResult.accessToken!!
+        }
+    }
+
+    override suspend fun getCurrentUser(): UserDto = withContext(Dispatchers.IO) {
+        jellyfinApi.userApi.getCurrentUser().content
     }
 }

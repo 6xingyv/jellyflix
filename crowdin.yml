@@ -1,0 +1,9 @@
+targets:
+  - name: String Translation
+    sources:
+      - src/commonMain/resources/MR/base/strings.xml
+    file: src/commonMain/resources/MR/%two_letters_code%/strings.xml
+    format: android
+files:
+  - source: /src/commonMain/resources/MR/base/strings.xml
+    translation: /src/commonMain/resources/MR/%two_letters_code%/strings.xml

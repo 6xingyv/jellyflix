@@ -30,8 +30,8 @@ import presentation.component.fluent.navigation.MenuItem
 import presentation.icons.Icons
 import presentation.icons.regular.*
 import presentation.navigation.Navigator
+import presentation.screen.account.AccountScreen
 import presentation.screen.home.HomeScreen
-import presentation.screen.login.LoginScreen
 import presentation.screen.settings.SettingsScreen
 import presentation.theme.JellyTheme
 
@@ -45,13 +45,12 @@ fun MainWindow(onCloseRequest: () -> Unit) {
             state = state,
             onCloseRequest = onCloseRequest,
             title = stringResource(R.strings.universal_app_name),
-            icon = painterResource("icons/icon_launcher.webp")
+            icon = painterResource("icons/launcher.png")
         ) {
             WindowStyle(
                 isDarkTheme = isSystemInDarkTheme(),
                 backdropType = if (hostOs == OS.Windows) WindowBackdrop.Mica else WindowBackdrop.Solid(MaterialTheme.colors.background)
             )
-
             val surfaceStrokeColor = MaterialTheme.colors.surface.copy(0.05f)
             val surfaceStroke = BorderStroke(width = 1.dp, color = surfaceStrokeColor)
 
@@ -62,7 +61,8 @@ fun MainWindow(onCloseRequest: () -> Unit) {
 
             val coroutineScope = rememberCoroutineScope()
 
-            val navigator = Navigator(LoginScreen())
+            val navigator = Navigator(AccountScreen())
+
             Surface(
                 color = Color.Transparent,
                 contentColor = MaterialTheme.colors.onSurface
@@ -76,6 +76,7 @@ fun MainWindow(onCloseRequest: () -> Unit) {
                             .animateContentSize(tween(500)),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
+                        // Todo: Find a method to check destination
                         MenuItem(
                             icon = Icons.Regular.Navigation,
                             label = "",
@@ -86,6 +87,18 @@ fun MainWindow(onCloseRequest: () -> Unit) {
                                 }
                             }
                         )
+                        AnimatedVisibility(navigator.canBack()) {
+                            MenuItem(
+                                icon = Icons.Regular.ArrowLeft,
+                                label = "",
+                                compact = !drawerIsOpen,
+                                onClick = {
+                                    coroutineScope.launch {
+                                        navigator.back()
+                                    }
+                                }
+                            )
+                        }
                         MenuItem(
                             icon = Icons.Regular.Home,
                             label = stringResource(R.strings.universal_home),
@@ -103,11 +116,11 @@ fun MainWindow(onCloseRequest: () -> Unit) {
                             icon = Icons.Regular.Person,
                             label = stringResource(R.strings.universal_account),
                             modifier = Modifier.fillMaxWidth(),
-                            selected = navigator.currentScreen() is LoginScreen,
+                            selected = navigator.currentScreen() is AccountScreen,
                             compact = !drawerIsOpen,
                             onClick = {
                                 coroutineScope.launch {
-                                    navigator.navigate(LoginScreen())
+                                    navigator.navigate(AccountScreen())
                                 }
                             }
                         )

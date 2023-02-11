@@ -28,7 +28,7 @@ class HomeViewModel : ViewModel() {
         this.repository = jellyfinRepository
     }
 
-    fun loadData(includeLibraries: Boolean = false) {
+    fun loadData(includeLibraries: Boolean = true) {
         viewModelScope.launch {
             _uiState.emit(UiState.Loading)
             try {
@@ -38,7 +38,7 @@ class HomeViewModel : ViewModel() {
                     items.add(loadLibraries())
                 }
 
-                val updated = items + loadDynamicItems()
+                val updated = loadDynamicItems() + items
 
                 _uiState.emit(UiState.Normal(updated))
             } catch (e: Exception) {

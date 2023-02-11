@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package presentation.navigation
 
 import presentation.utils.Fragment
@@ -17,6 +19,11 @@ class Navigator(rootPage: Screen) {
         fragmentStack.clear()
     }
 
+    fun clear() {
+        fragmentStack.clear()
+        screenStack.clear()
+    }
+
     fun navigate(fragment: Fragment) {
         fragment.navigator = this
         fragment.parentScreen = currentScreen()
@@ -24,10 +31,12 @@ class Navigator(rootPage: Screen) {
     }
 
     fun back() {
-        if (fragmentStack.size() >0) {
+        if (fragmentStack.size() > 0) {
             fragmentStack.pop()
         } else {
-            screenStack.pop()
+            if (canBack()) {
+                screenStack.pop()
+            }
         }
     }
 

@@ -1,6 +1,8 @@
 package data.repository
 
+import app.cash.paging.PagingData
 import data.model.SortBy
+import kotlinx.coroutines.flow.Flow
 import org.jellyfin.sdk.model.UUID
 import org.jellyfin.sdk.model.api.*
 
@@ -68,4 +70,14 @@ interface JellyfinRepository {
     fun getBaseUrl(): String
 
     suspend fun updateDeviceName(name: String)
+    suspend fun getItemsPaging(
+        parentId: java.util.UUID?,
+        includeTypes: List<BaseItemKind>?,
+        recursive: Boolean,
+        sortBy: SortBy,
+        sortOrder: SortOrder
+    ): Flow<PagingData<BaseItemDto>>
+
+    suspend fun getCurrentUser(): UserDto
+    suspend fun loginByPassword(server: String, username: String, password: String)
 }

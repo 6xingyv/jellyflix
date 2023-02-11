@@ -13,5 +13,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = "desktop"
+rootProject.name = "Jellyflix"
 

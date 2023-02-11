@@ -16,7 +16,7 @@ import presentation.icons.Icons
 import presentation.icons.regular.Warning
 
 @Composable
-fun ErrorComposable(errorMessage: String) {
+fun ErrorComposable(exception: Exception) {
     Box(Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.align(Alignment.Center),
@@ -25,8 +25,8 @@ fun ErrorComposable(errorMessage: String) {
         ) {
             Icon(Icons.Regular.Warning, Icons.Regular.Warning.name)
             Text(stringResource(R.strings.composable_error))
-            if(errorMessage.isNotEmpty()) {
-                Text(errorMessage)
+            if (exception.localizedMessage != null) {
+                Text(exception.localizedMessage)
             }
         }
     }

@@ -1,4 +1,4 @@
-package presentation.screen.login
+package presentation.screen.account
 
 import data.repository.JellyfinRepository
 import data.source.remote.JellyfinApi
@@ -6,7 +6,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import org.jellyfin.sdk.model.api.AuthenticateUserByName
 import presentation.utils.ViewModel
 
 class LoginViewModel : ViewModel() {
@@ -18,7 +17,9 @@ class LoginViewModel : ViewModel() {
 
     sealed class UiState {
         data class Normal(
-            val server: String = "http://localhost:8096", val username: String = "阿睿", val password: String = "123456zzr"
+            val server: String = "http://localhost:8096",
+            val username: String = "阿睿",
+            val password: String = "123456zzr"
         ) : UiState()
 
         object Loading : UiState()
@@ -35,28 +36,25 @@ class LoginViewModel : ViewModel() {
         }
     }
 
-    fun login(server: String, username: String, password: String) {
+    fun loginByPassword(server: String, username: String, password: String) {
         viewModelScope.launch {
-            _uiState.emit(UiState.Normal(server, username, password))
             try {
-                api.apply {
-                    api.baseUrl = server
-                }
-                val authenticationResult by api.userApi.authenticateUserByName(
-                    data = AuthenticateUserByName(
-                        username = username,
-                        pw = password
-                    )
-                )
-                api.apply {
-                    userId = authenticationResult.user!!.id
-                    api.userId = authenticationResult.user!!.id
-                    api.accessToken = authenticationResult.accessToken!!
-                }
+                repository.loginByPassword(server, username, password)
                 _uiState.emit(UiState.Logged)
             } catch (e: Exception) {
                 _uiState.emit(UiState.Error(e))
             }
         }
     }
+
+//    fun loginByPIN(server: String, secret: String) {
+//        viewModelScope.launch {
+//            try {
+//                repository.loginByPIN(server = server, pin = secret)
+//                _uiState.emit(UiState.Logged)
+//            } catch (e: Exception) {
+//                _uiState.emit(UiState.Error(e))
+//            }
+//        }
+//    }
 }
