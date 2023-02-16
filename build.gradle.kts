@@ -48,7 +48,7 @@ kotlin {
                 // Jellyfin SDK
                 implementation("org.jellyfin.sdk:jellyfin-core:1.4.1")
                 // Jetpack Paging Multiplatform()
-                implementation("app.cash.paging:paging-common:3.1.1-0.1.1")
+                implementation("app.cash.paging:paging-common:3.1.1-0.2.0")
             }
         }
     }
