@@ -44,7 +44,7 @@ kotlin {
 //                implementation("com.squareup.retrofit2:converter-gson:2.9.0")
                 // Moko
                 implementation("dev.icerock.moko:resources:0.22.0")
-                implementation("dev.icerock.moko:resources-compose:0.22.0")
+                implementation("dev.icerock.moko:resources-compose:0.22.1")
                 // Jellyfin SDK
                 implementation("org.jellyfin.sdk:jellyfin-core:1.4.2")
                 // Jetpack Paging Multiplatform()
