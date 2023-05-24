@@ -9,7 +9,7 @@ pluginManagement {
     plugins {
         kotlin("multiplatform").version(extra["kotlin.version"] as String)
         id("org.jetbrains.compose").version(extra["compose.version"] as String)
-        id("dev.icerock.mobile.multiplatform-resources").version("0.22.1")
+        id("dev.icerock.mobile.multiplatform-resources").version("0.22.3")
     }
 }
 
