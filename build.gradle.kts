@@ -38,7 +38,7 @@ kotlin {
                 // Window Styler(https://github.com/MayakaApps/ComposeWindowStyler)
                 implementation("com.mayakapps.compose:window-styler:0.3.2")
                 // Koin
-                implementation("io.insert-koin:koin-core:3.4.0")
+                implementation("io.insert-koin:koin-core:3.4.1")
                 // Retrofit
 //                implementation("com.squareup.retrofit2:retrofit:2.9.0")
 //                implementation("com.squareup.retrofit2:converter-gson:2.9.0")
