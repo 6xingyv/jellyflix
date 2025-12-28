@@ -46,7 +46,7 @@ kotlin {
                 implementation("dev.icerock.moko:resources:0.22.3")
                 implementation("dev.icerock.moko:resources-compose:0.22.3")
                 // Jellyfin SDK
-                implementation("org.jellyfin.sdk:jellyfin-core:1.6.8")
+                implementation("org.jellyfin.sdk:jellyfin-core:1.8.5")
                 // Jetpack Paging Multiplatform()
                 implementation("app.cash.paging:paging-common:3.1.1-0.2.0")
             }
